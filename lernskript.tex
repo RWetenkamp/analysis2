@@ -1,0 +1,143 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{hyperref}
+\usepackage{colortbl}
+\usepackage{listings}
+\usepackage{chngcntr}
+\usepackage{upgreek}
+\usepackage{pgfplots}
+\pgfplotsset{compat = newest}
+\usepackage{amsthm}
+\usepackage{ulem}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usetikzlibrary{positioning}
+\usepackage{tikz-network}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+\addbibresource{literature.bib}
+\author{Roman Wetenkamp}
+\title{Einführung in die mehrdimensionale Differentialrechnung}
+\subtitle{Angewandte Mathematik für Informatiker*innen}
+\theoremstyle{remark}
+\newtheorem{note}{Bemerkung}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{satz}{Satz}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{example}{Beispiel}[section]
+
+
+\begin{document}
+\vspace{3cm}
+\maketitle
+\begin{center}
+\includegraphics[scale=0.7]{DHBW.jpg}
+\end{center}
+\pagebreak
+\tableofcontents
+\pagebreak
+\section*{Vorwort}
+Liebe Leser*innen, \\\\
+schwere Brocken schocken trocken, wenn man nicht auf sie gefasst ist. So passt es, weiter zu lesen und zu schreiben, damit offene Fragen nicht mehr offen bleiben. Als wir zu Beginn dieses Semesters den Sprung von der eindimensionalen Analysis hin zur auf einmal so stark mit der Linearen Algebra verknüpften mehrdimensionalen Analysis schaffen sollten, überforderte mich das. Diese Lücke zwischen Analysis 1 und Analysis 2 möchte ich mit diesem Skript adressieren und -- falls möglich -- schließen. Im Gegensatz zu hochprofessionellen Lehrbüchern für Mathematikstudierende versuche ich eher, verständlich und ausführlich genug zu bleiben. Mit Beispielen und Aufgaben versuche ich, euch einen Mehrwert zu bieten und nebenbei wieder uns alle erfolgreich ins nächste Semester aufrücken zu lassen. \\\\
+Dieses Skript baue ich wie folgt auf:
+\begin{enumerate}
+\item Wiederholung wichtiger Grundlagen der linearen Algebra
+\item Wiederholung wichtiger Grundlagen der eindimensionalen Analysis
+\item Einführung in die Mehrdimensionalität
+\item Mathematik mit mehreren Veränderlichen
+\end{enumerate}
+Dort, wo ich es für sinnvoll erachte, sind Hinweise auf weiterführende Materialien wie Bücher oder Videos gegeben. \\\\
+\textit{Viel Erfolg!}  \\
+\begin{flushright}
+Roman Wetenkamp \\
+Mannheim, den \today
+\end{flushright}  
+\vfill
+\paragraph{Warnung}
+Das Studium an einer Dualen Hochschule unterscheidet sich von dem Studium an Universitäten oder regulären Fachhochschulen insbesondere dadurch, dass aufgrund der Dualität von Theorie und Praxis meist nur die Hälfte der Zeit zur Vermittlung des Stoffes zur Verfügung steht (wenn dann auch intensiver). Daher gehen Sie bitte nicht davon aus, dass Sie dieses Skript ausreichend auf Klausuren in regulären Vollzeitstudiengängen vorbereitet!
+\paragraph{Hinweis}
+Dieses Dokument ist kein Vorlesungsmaterial, hat nicht den Anspruch auf {Voll}\-{ständigkeit} und enthält mit Sicherheit Fehler. Desweiteren ist es noch lange nicht vollendet (es ist infrage zustellen, ob es das je sein wird), und doch möchte ich Sie ermutigen, beizutragen! Jegliche Fehler, Probleme oder Anmerkungen können Sie mir gerne über das dazugehörige GitHub-Repository unter der URL \url{https://github.com/RWetenkamp/analysis2} zukommen lassen. Danke!
+\pagebreak
+\part{Grundlagen der Linearen Algebra}
+Erinnern wir uns zurück an das erste Semester. Nach einer Einführung in grundlegendste Themen wie Mengen, Relationen und Gruppen widmeten wir uns den eigentlichen Inhalten der linearen Algebra, Vektoren, Vektorräumen, linearen Abbildungen und Matrizen. Dieses Kapitel soll einen ganz rudimentären Überblick geben, um womöglich Vergessenes zurück ins Bewusstsein zu rufen, damit wir daran anschließen können.
+\section{Vektoren}
+Beginnen wir zunächst mit Vektoren. Ein Vektor wird häufig als ein Pfeil dargestellt, weil er physikalische Größen wie Geschwindigkeiten, Kräfte oder Ausdehnungen beschreibt. Grundästzlich wird in der Physik unterschieden zwischen \textbf{vektoriellen} Größen, also den obigen beispielsweise, und \textbf{skalaren} Größen. Skalare Größen sind diejenigen, die durch eine einzige reelle Zahl angegeben werden, zum Beispiel Temperaturen oder Massen. 
+\begin{definition}
+Ein $n$-Tupel $(a_1, a_2, ..., a_n) \in \mathbb{R}^{n}$ bezeichnen wir als \textbf{Vektor}. Die reellen Zahlen $a_1, ..., a_n$ heißen \textbf{Koordinaten} oder \textbf{Komponenten} eines Vektors. Wir stellen einen Vektor $a$ als $\vec{a}$ dar.
+\end{definition}
+Vermutlich werden Sie Vektoren bereits in Ihrer Schulzeit behandelt haben. Sie haben Geraden mit Orts- und Richtungsvektoren beschrieben, mit Geraden Ebenen aufgespannt und darin Abstände zwischen Punkt, Gerade und Ebene berechnet. Dabei werden Sie nicht um die Rechenregeln bei Vektoren herum gekommen sein:
+\begin{definition} Seien $\vec{a} = (a_1, a_2, ..., a_n), \vec{b} = (b_1, b_2, ..., b_n)$ zwei Vektoren. Wir definieren die \textbf{Summe} beider Vektoren als
+\[\vec{a} + \vec{b} = \left( \begin{matrix} a_1 + b_1 \\ a_2 + b_2 \\ ... \\ a_n + b_n \end{matrix} \right).\]
+Ebenso definieren wir die \textbf{Multiplikation} eines Vektors und eines Skalars als
+\[ k \cdot \vec{a} = \left( \begin{matrix} k \cdot a_1 \\ k \cdot a_2 \\ ... \\ k \cdot a_n \end{matrix}\right).\]
+\end{definition}
+Diese beiden Rechenoperationen auf Vektoren benötigen wir, um im Folgenden Vektorräume definieren zu können. Doch zunächst betrachten wir eine weitere Eigenschaft von Vektoren:
+\begin{definition}
+Die \textbf{Länge} oder der \textbf{Betrag} eines Vektors $\vec{a} \in \mathbb{R}^{n}$ wird definiert durch
+\[\Vert \vec{a} \Vert = \sqrt{\sum\limits_{j = 1}^{n} a_{j}^{2}} = \sqrt{a_{1}^{2} + a_{2}^{2} + ... + a_{n}^{2}}\]
+\end{definition}
+\begin{note}
+Der Betrag eines Vektors ist immer eine nichtnegative reelle Zahl und $\Vert \vec{a} \Vert = 0 \Leftrightarrow \vec{a} = 0$
+\end{note}
+\section{Vektorräume}
+\begin{definition}
+Sei $\mathbb{K}$ ein beliebiger Körper und $V$ eine Menge mit zwei Verknüpfungen:
+\begin{enumerate}
+\item \textbf{Vektoraddition}: Je zwei Elementen $\vec{a}, \vec{b} \in V$ wird ein Element $\vec{a} + \vec{b} \in V$ zugeordnet, sodass $(V, +)$ eine kommutative ({\glqq}abelsche{\grqq}) Gruppe wird. Neutrales Element ist dabei der Nullvektor und das zu $\vec{a}$ inverse Element ist $\vec{-a}$.
+\item \textbf{Multiplikation mit einem Skalar}: Je einem $\vec{a} \in V$ und einem $k \in \mathbb{K}$ wird ein Element $k \cdot \vec{a} \in V$ (wie oben) zugeordnet.
+\end{enumerate}
+Dann wird $V$ ein \textbf{$\mathbb{K}$-Vektorraum} genannt.
+\end{definition}
+Da wir nun Vektoren auch aus anderen Körpern als $\mathbb{R}$ betrachten, genügt unsere Definition der Länge eines Vektors nicht mehr. Vorstellbar wären nun nämlich auch Vektoren eines Vektorraums über einem Restklassenkörper, wo auch andere Vektoren als der Nullvektor die Länge $0$ hätten. Dem begegnen wir, in dem wir eine Funktion dafür definieren.
+\begin{definition}
+Sei $V$ ein reeller Vektorraum mit einer Funktion $\Vert \cdot \Vert : V \mapsto [0, \infty{)}$. \\Wenn 
+\begin{align*}
+\Vert \vec{a} \Vert &> 0 \text{ für } \vec{a} \neq 0 \quad &\text{(Positivität)}\\
+\Vert k \cdot \vec{a} \Vert &= \vert k \vert \cdot \Vert \vec{a} \Vert & \text{(Homogenität)} \\
+\Vert \vec{a} + \vec{b} \Vert &\leq \Vert \vec{a} \Vert + \Vert \vec{b} \Vert & \text{(Dreiecksungleichung)}
+\end{align*}
+für alle $\vec{a}, \vec{b} \in V$ und $k \in \mathbb{R}$, so nennen wir diese Funktion eine \textbf{Norm} und den Vektorraum $V$ einen \textbf{normierten Raum}.
+\end{definition}
+Damit hätten wir den Grundstein für weitere Betrachtungen und Definitionen gelegt -- es liegt noch einiges vor uns.
+
+\section{Skalarprodukt}
+Im vorherigen Abschnitt haben wir bereits die Multiplikation eines Vektors mit einem Skalar betrachtet. Nun führen wir die Multiplikation zweier Vektoren ein. Nur diese Multiplikation nennen wir \textbf{Skalarmultiplikation}, weil wir als Ergebnis einen Skalar erhalten.
+\begin{definition}
+Das Produkt zweier Vektoren $\vec{a} = (a_1, a_2, ..., a_n)$ und $\vec{b} = (b_1, b_2, ..., b_n)$ ist definiert durch 
+\[\langle \vec{a}, \vec{b} \rangle = \sum\limits_{j=1}^{n}a_j \cdot b_j = a_1 \cdot b_1 + a_2 \cdot b_2 + ... + a_n \cdot b_n\] und wird als \textbf{Skalarprodukt} oder \textbf{inneres Produkt} der beiden Vektoren bezeichnet.
+\end{definition}
+Das Skalarprodukt verwenden wir nun, um folgenden Zusammenhang festzuhalten:
+\begin{satz}
+\[\cos ({\phi}) = \frac{\langle \vec{v}, \vec{w}\rangle}{\Vert \vec{v} \Vert \cdot \Vert \vec{w} \Vert}\]
+\end{satz} Der Beweis des Satzes folgt aus der Cauchy-Schwarzschen Ungleichung:
+\begin{satz}[Cauchy-Schwarzsche Ungleichung]
+Sei $V$ ein $\mathbb{R}$-Vektorraum mit einem Skalarprodukt. Dann gilt für $\vec{v}, \vec{w} \in V$:
+\[\vert \langle \vec{v}, \vec{w} \rangle \vert ^{2} \leq \langle \vec{v}, \vec{v} \rangle \cdot \langle \vec{w}, \vec{w} \rangle\]
+\end{satz}
+\section{Normen}
+Nun müssen wir uns näher mit Normen beschäftigen. Wir haben gesehen, dass die Norm eine Abbildung ist, die die drei Eigenschaften Definitheit, Homogenität und die Dreiecksungleichung erfüllen muss. Wir begannen mit der Länge eines Vektors und abstrahierten darauf basierend die Norm. Die Formel für die Länge eines Vektors ist eine spezielle Norm, die sogenannte \textbf{euklidische Norm}. Nun ist aber offensichtlich, dass es weitere Abbildungen auf Vektorräumen geben kann, die die drei Axiome erfüllen - folglich gibt es eine Vielzahl verschiedener Normen, von denen wir einige im Folgenden betrachten wollen.
+\begin{definition} Wir betrachten einen Vektor $\vec{v} \in \mathbb{R}^n$.
+\begin{enumerate}
+\item Die \textbf{Summennorm} oder \textbf{1-Norm} des Vektors ist definiert durch: 
+\[\Vert \vec{v} \Vert _{1} = \sum\limits_{i=1}^{n} \vert v_i \vert\]
+\item Die \textbf{euklidische Norm} pder \textbf{2-Norm} des Vektors ist definiert durch:
+\[\Vert \vec{v} \Vert _{2} = \sqrt{\sum\limits_{i=1}^{n} \vert v_i \vert ^{2}}\]
+\item Die \textbf{Maximumsnorm} oder $\infty$-Norm des Vektors ist definiert durch:
+\[\Vert \vec{v} \Vert _{\infty} = \max _{i=1, ..., n} \vert v_i \vert\]
+\end{enumerate}
+\end{definition}
+Darauf basierend existiert folgender Satz:
+\begin{satz}
+Die euklidische Norm und die Maximumsnorm sind äquivalent. Sie lassen sich gegeneinander mit Konstanten abschätzen.
+\end{satz}
+\end{document}
