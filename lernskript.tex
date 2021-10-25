@@ -132,12 +132,49 @@ Nun müssen wir uns näher mit Normen beschäftigen. Wir haben gesehen, dass die
 \[\Vert \vec{v} \Vert _{1} = \sum\limits_{i=1}^{n} \vert v_i \vert\]
 \item Die \textbf{euklidische Norm} pder \textbf{2-Norm} des Vektors ist definiert durch:
 \[\Vert \vec{v} \Vert _{2} = \sqrt{\sum\limits_{i=1}^{n} \vert v_i \vert ^{2}}\]
-\item Die \textbf{Maximumsnorm} oder $\infty$-Norm des Vektors ist definiert durch:
+\item Die \textbf{Maximumsnorm} oder \textbf{$\infty$-Norm} des Vektors ist definiert durch:
 \[\Vert \vec{v} \Vert _{\infty} = \max _{i=1, ..., n} \vert v_i \vert\]
 \end{enumerate}
 \end{definition}
 Darauf basierend existiert folgender Satz:
 \begin{satz}
-Die euklidische Norm und die Maximumsnorm sind äquivalent. Sie lassen sich gegeneinander mit Konstanten abschätzen.
+Die euklidische Norm $\Vert \vec{v} \Vert _{2} = \sqrt{\sum\limits_{i=1}^{n} v_{i}^{2}}$ und die Maximumsnorm $\Vert \vec{v} \Vert _{\infty} = \max _{i=1, ..., n} \vert v_i \vert$ sind äquivalent. Sie lassen sich gegeneinander mit Konstanten abschätzen.
+\[k_1 \cdot \Vert \vec{v} \Vert _{2} < \Vert \vec{v} \Vert _{\infty} < k_2 \cdot \Vert \vec{v} \Vert\]
 \end{satz}
+Nun greifen wir den Vorlesungsinhalten etwas vor und führen einen weiteren Begriff ein, den wir später gebrauchen werden.
+\begin{definition}
+Sei $E$ ein reeller Vektorraum. Unter einer \textbf{Metrik} verstehen wir eine Abbildung $d: E \times E \to \mathbb{R}$ mit folgenden Eigenschaften:
+\begin{enumerate}
+\item $d(\vec{x}, \vec{y}) \geq 0 \text{ und } = 0 \Leftrightarrow \vec{x} = \vec{y}$
+\item $d(\vec{x}, \vec{y}) = d(\vec{y}, \vec{x})$
+\item $d(\vec{x}, \vec{y}) \leq d(\vec{x}, \vec{z}) + d(\vec{z}, \vec{y})$ (Dreiecksungleichung)
+\end{enumerate}
+\end{definition}
+\begin{note}
+Die Wahl des Buchstabens $d$ für die Metrik $d(\vec{v}, \vec{w})$ erklärt, was die Metrik angibt: Den Abstand - die Distanz - zwischen zwei Punkten bzw. Vektoren.
+\end{note}
+Damit können wir folgenden Satz formulieren:
+\begin{satz}
+Aus jeder Norm $N$ kann eine Metrik $d_N$ wie folgt abgeleitet werden:
+\[d_N (\vec{v}, \vec{w}) := N(\vec{v} - \vec{w})\]
+\end{satz}
+\pagebreak
+\section*{Aufgaben}
+\paragraph{Aufgabe 1} Berechnen Sie für die die angegebenen Vektoren jeweils die drei definierten Normen.
+\begin{enumerate}
+\item $\vec{w_1} = \left( \begin{matrix} 17 \\ 12 \\ 24 \\ 7\end{matrix} \right)$
+\item $\vec{w_2} = \left( \begin{matrix} x+3 \\ 12-z \\ \frac{x}{2} \end{matrix} \right), \text{ mit } 5 < x < z$
+\item $\vec{w_3} = \left( \begin{matrix} 0 \\ -1 \\ 0 \end{matrix} \right)$
+\end{enumerate}
+\begin{flushright}
+Lösung (folgt)
+\end{flushright}
+\paragraph{Aufgabe 2} Zeigen Sie, dass die aus der Norm abgeleitete (vermeintliche) Metrik tatsächlich alle drei geforderten Axiome einer Metrik erfüllt.
+\begin{flushright}
+Lösung (folgt)
+\end{flushright}
+\paragraph{Aufgabe 3} Beurteilen Sie, inwiefern Skalarprodukt, Norm und Metrik in einem Zusammenhang stehen.
+\begin{flushright}
+Lösung (folgt)
+\end{flushright}
 \end{document}
