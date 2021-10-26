@@ -52,9 +52,8 @@ schwere Brocken schocken trocken, wenn man nicht auf sie gefasst ist. So passt e
 Dieses Skript baue ich wie folgt auf:
 \begin{enumerate}
 \item Wiederholung wichtiger Grundlagen der linearen Algebra
-\item Wiederholung wichtiger Grundlagen der eindimensionalen Analysis
-\item Einführung in die Mehrdimensionalität
-\item Mathematik mit mehreren Veränderlichen
+\item Einführung in die mehrdimensionale Analysis (mit Wiederholung der eindimensionalen Analysis)
+\item Anwendungsszenarien
 \end{enumerate}
 Dort, wo ich es für sinnvoll erachte, sind Hinweise auf weiterführende Materialien wie Bücher oder Videos gegeben. \\\\
 \textit{Viel Erfolg!}  \\
@@ -177,4 +176,68 @@ Lösung (folgt)
 \begin{flushright}
 Lösung (folgt)
 \end{flushright}
+\pagebreak
+\part{Einführung in die Analysis mehrerer Veränderlicher}
+Nun ist der Koffer gepackt, alle wichtigen Hilfsmittel der linearen Algebra liegen vor, um sich ganz der Analysis zu verschreiben. Ich verzichte auf eine separate Wiederholung der Konzepte der Analysis I und beginne direkt damit, beides ineinander zu verweben, auch, um deutlich zu machen, dass Analysis II die Analysis I im Wesentlichen nur ergänzt.
+\section{Folgen, Reihen und Konvergenz}
+Steigen wir ein, indem wir uns die Definition von Folgen zurück ins Gedächtnis rufen.
+\begin{definition}
+Eine Folge ist eine endliche oder nicht-endliche Auflistung von Zahlen, die in aufsteigender Riehenfolge lückenlos durchnummeriert sind. Wir schreiben eine Folge $a_n$ als $(a_{n}) = a_1, a_2, ..., a_n, a_n+1, ..., a_m$.
+\end{definition}
+In der Analyis I haben wir Folgen auf der Menge der reellen Zahlen betrachtet. Nun lassen sich jedoch auch Folgen von Vektoren betrachten.
+\begin{example}
+\[(a_n) = \left( \begin{matrix}\frac{1}{n} \\ \frac{1}{n}\end{matrix}\right), n \in \mathbb{N}\]
+\end{example}
+Über Folgen können wir eine Reihe von Aussagen treffen. Eine davon ist eine Beschreibung des Verhaltens sehr großer Folgenglieder, das Grenzwertverhalten.
+\begin{definition}
+Sei eine Folge $(a_n)$ und außerdem eine Zahl $g \in \mathbb{R}$ gegeben. $g$ heißt \textbf{Grenzwert} von $(a_n)$, falls $\forall \epsilon > 0 \exists N \in \mathbb{N}$ mit:
+\[\vert a_n - g \vert < \epsilon \quad \forall n \geq N\]
+Eine Folge hat höchstens einen Grenzwert. Existiert ein Grenzwert, so \textbf{konvergiert} die Folge.
+\end{definition}
+Mit unseren Definitionen aus der linearen Algebra können wir die Definition der Konvergenz auf Folgen von Vektoren ausweiten.
+\begin{definition}
+Gegeben sei eine Folge von Vektoren $(a_n) \in \mathbb{R}^{n}$ und eine Metrik $d$. Dann konvergiert $(a_n)$ gegen einen Grenzwert $g \in \mathbb{R}^{n}$, falls gilt: 
+\[\forall \epsilon > 0 \exists N \in \mathbb{N} \quad \forall n > N: d(g, a_n) < \epsilon\]
+\end{definition}
+Nun werden wir noch einen Schritt komplizierter und betrachten die Konvergenz von Funktionen.
+\begin{definition}
+Sei $f: X \subset \mathbb{R}^{n} \to \mathbb{R}^{m}$ eine Funktion und $a \in X$. Wir nennen $L_a \in R^{m}$ Grenzwert von $f$ bezüglich der Annäherung von $x$ an $a$, falls für jede konvergente Folge $x_n \to a$ die Folge $f(x_n)$ gegen $L_a$ konvergiert. Dies lässt sich schreiben als \[
+\lim _{x \to a} f(x) = L_a \]
+\end{definition}
+\begin{note}
+Wir betrachten hier bereits eine mehrdimensionale Funktion. Zunächst konstruieren wir eine Folge $(x_n)$ aus dem Definitionsbereich dieser Funktion und betrachten ihr Grenzverhalten. Konvergiert jede erdenkliche Folge gegen $a$, so konvergiert auch die Folge nach Anwendung der Funktion $f$, also $f(x_n)$. Dieser Grenzwert ist selbstverständlich im Allgemeinen nicht $a$, sondern wird von uns mit $L_a$ für {\glqq}Limes{\grqq} bezeichnet. 
+\end{note}
+\section{Stetigkeit}
+Besinnen wir uns zurück auf das Konzept der Stetigkeit. Als ganz profane und rudimentäre Erklärung sagten wir, dass eine Funktion genau dann stetig ist, wenn wir beim Zeichnen ihres Graphen den Stift nicht absetzen müssen, also eine durchgezogene Linie ohne Sprünge zu Papier bringen können. Wir ergänzten und formalisierten diese Definition zu der folgenden:
+\begin{definition}[Epsilon-Delta-Kriterium]
+Eine Funktion $f$ ist genau dann stetig in $x_0$, wenn \[
+\forall \epsilon > 0 \quad \exists \delta > 0 \quad \forall x \in D_f: \vert x - x_0 \vert < \delta \Rightarrow \vert f(x) - f(x_0) \vert < \epsilon \] gilt.
+\end{definition}
+Eine weitere, andere Definition nutzt die Grenzwertbildung aus.
+\begin{definition}
+Eine Funktion $f$ heißt stetig in $x_0$, falls 
+\[\lim _{x \to x_0} f(x) = f(x_0)\] gilt.
+\end{definition}
+\begin{note}
+Das heißt: Existiert für jedes $x$, dass ich gegen $x_0$ laufen lasse, ein Grenzwert und stimmt dieser mit dem Funktionswert von $x_0$, also $f(x_0)$ überein, dann ist diese Funktion stetig in $x_0$.
+\end{note}
+Eine Funktion insgesamt ist dann stetig, wenn sie für alle Werte ihres Definitionsbereiches stetig ist. 
+\section{Differenzierbarkeit}
+Stetig wird es schwerer, ebenso aber natürlich auch spannender. Nun sind wir bereit, Funktionen abzuleiten und die fundamentalen Konzepte der Analysis anzuwenden. Betrachten wir zunächst den Differentialquotienten aus der Analysis I:
+\begin{definition}
+Die lokale Änderungsrate einer Funktion $f: \mathbb{R} \to \mathbb{R}$ wird durch den Differentialquotienten
+\[f'(x) = \lim _{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}\] angegeben.
+\end{definition}
+Nun wollen wir diese Definition auf mehrdimensionale Funktionen erweitern. Dafür werden wir uns zunächst bewusst, dass wir einen weiteren Parameter benötigen: Einen Vektor, der angibt, in welche Richtung wir die Ableitung bestimmen wollen.
+\begin{definition}
+Sei $f: U \to \mathbb{R}$ eine Funktion. Für einen Vektor $\vec{h} \in \mathbb{R}^{n}$ und einen Punkt $a \in U$ heißt der Grenzwert
+\[\delta _{n} f(a) := \lim _{t \to o} \frac{f(a + t\vec{h}) - f(a)}{t}\] die \textbf{Richtungsableitung} von $f$ am Punkt $a$ in Richtung $\vec{h}$.
+\end{definition}
+Ein Speziallfall dessen ist die \textbf{partielle Ableitung} mit einem Einheitsvektoren als Richtungsangabe.
+\begin{definition}
+Für die Standardbasisvektoren $\vec{e_i}$ nennen wir 
+\[\frac{\delta f(a)}{\delta x_i} = \delta _{e_i} f(a) = \lim _{t \to 0} \frac{f(a + t\vec{e_i}) - f(a)}{t}\]
+die partielle Ableitung von $f$ in $a$ nach $\vec{x_i}$.
+\end{definition}
+
 \end{document}
