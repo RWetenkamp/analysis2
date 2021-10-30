@@ -237,7 +237,51 @@ Ein Speziallfall dessen ist die \textbf{partielle Ableitung} mit einem Einheitsv
 \begin{definition}
 Für die Standardbasisvektoren $\vec{e_i}$ nennen wir 
 \[\frac{\delta f(a)}{\delta x_i} = \delta _{e_i} f(a) = \lim _{t \to 0} \frac{f(a + t\vec{e_i}) - f(a)}{t}\]
-die partielle Ableitung von $f$ in $a$ nach $\vec{x_i}$.
+die \textbf{partielle Ableitung} von $f$ in $a$ nach $\vec{x_i}$.
 \end{definition}
+Darauf aufbauend definieren wir nun die partielle Differenzierbarkeit.
+\begin{definition}
+Eine Funktion $f: U \to \mathbb{R}$ heißt partiell differenzierbar im  Punkt $a \in U$, falls die partiellen Ableitungen
+\[\frac{\delta f(a)}{\delta x_1}, ..., \frac{\delta f(a)}{\delta x_n}\]
+existieren und stetig sind. In diesem Fall nennen wir die Matrix \[
+df(a) := \left( \begin{matrix}\frac{\delta f(a)}{\delta x_1} & ... & \frac{\delta f(a)}{\delta x_n}\end{matrix}\right)
+\]
+das \textbf{Differential} von $f$ im Punkt $a$.
+\end{definition}
+Dasselbe auf dem Kopf ist die Definition des Gradienten:
+\begin{definition}
+Der Vektor \[\nabla f(a) := \left( \begin{matrix}\frac{\delta f(a)}{\delta x_1} \\ ... \\ \frac{\delta f(a)}{\delta x_n}\end{matrix}\right)\]
+wird als \textbf{Gradient} bezeichnet. Ferner gilt:\[
+df(a) \cdot h = \langle \nabla f(a), h \rangle\]
+\end{definition}
+Für das Differential gelten zudem eine Reihe von Eigenschaften:
+\begin{satz}
+Für das Differential einer differenzierbaren Funktion $f: U \to \mathbb{R}$ gilt für alle $a \in U$:
+\begin{itemize}
+\item $df(a)(h) := df(a) \cdot h$ - Dies ist eine lineare Abbildung von $\mathbb{R}^n \to \mathbb{R}$.
+\item $df(a)\cdot h = \delta _n f(a)$ 
+\item $d(f \cdot g) = g(a)d(f) + f(a)dg$
+\item $d(f+g) = df + dg$ 
+\end{itemize}
+\end{satz}
+Dies ist nun genug Handwerkszeug, um die erste Ableitung mehrdimensionaler Funktionen zu berechnen. Für bestimmte Fragen, wie beispielsweise nach Extrema, wird ebenfalls die zweite Ableitung verlangt. Oben haben wir eine Funktion in jede Dimension (also nach jeder Variable) abgeleitet und einen Vektor (den Gradienten) erhalten. Wollen wir nun die zweite Ableitung bestimmen, müssen wir diesen Vektor ableiten. 
+\begin{definition}
+Sei $U \subset \mathbb{R}^n$ offen und $f: U \to \mathbb{R}$ eine zweimal stetig differenzierbare Funktion. Unter der \textbf{Hesseschen Matrix} von $f$ im Punkt $x \in U$ versteht man die $n \times n$-Matrix
+\[(\text{Hess} f)(x) = \left( \begin{matrix} \frac{\delta}{\delta x_1} \frac{\delta}{\delta x_1} & ... & \frac{\delta}{\delta x_1}\frac{\delta}{\delta x_n} \\
+... & ... & ... \\
+\frac{\delta}{\delta x_n}\frac{\delta}{\delta x_1} & ... & \frac{\delta}{\delta x_n}\frac{\delta}{\delta x_n} \end{matrix}\right)\]
+Diese Matrix ist nach dem Satz von Schwarz symmetrisch.
+\end{definition}
+\begin{note}
+Die Reihenfolge, nach welcher Variable zuerst abgeleitet wird, spielt folglich keine Rolle. Die Annahme, man können hier die Ableitungen miteinander multiplizieren, ist falsch. Viel mehr handelt es sich bei den Delta-Brüchen um eine Kennzeichnung, dass hier eine Ableitung gebildet wurde.
+\end{note}
+\section{Approximation}
+In der Analysis I haben wir uns bereits mit Approximationen beschäftigt. Damit bezeichnen wir das Verfahren, eine komplizierte Funktion durch eine einfachere -- häufig lineare oder polynomiale -- anzunähern. Diese Annäherungen sind immer bis auf einen bestimmten Fehler genau und genügen so vielen Fragestellungen aus der Anwendung.
+Ein prominentes Beispiel ist die \textbf{Taylor-Approximation}, die wir an dieser Stelle kurz wiederholen wollen.
+\begin{definition} Das $n$-te \textbf{Taylorpolynom} von $f$ an der Entwicklungsstelle $a$ ist definiert durch:
+\[T_n f(x, a) := \sum\limits _{k=0}^{n} \frac{f^{k}(a)}{k!} \cdot (x-a)^k\]
+Der Genauigkeit halber wird ein Restglied $R_n f(x,a)$ hinzu addiert.
+\end{definition}
+
 
 \end{document}
